@@ -48,7 +48,6 @@ from sqlalchemy.orm import relationship, DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Text, ForeignKey
 from functools import wraps
 from werkzeug.security import generate_password_hash, check_password_hash
-from hashlib import md5
 # from flask_gravatar import Gravatar  # Not compatible with latest Flask
 
 # Alternative method to Flask-Gravatar
