@@ -1,6 +1,8 @@
 # Ignore environment file with sensitive info
 .env
 
+.DS_Store
+__pycache__
 .venv
 .idea
 instance
