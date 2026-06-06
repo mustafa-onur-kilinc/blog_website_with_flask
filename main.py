@@ -140,7 +140,7 @@ def load_user(user_id: str):
     if not user_id:
         return None
 
-    query_result = db.session.execute(db.select(User).where(User.id == user_id))
+    query_result = db.session.execute(db.select(User).where(User.id == int(user_id)))
     loaded_user = query_result.scalar()
 
     return loaded_user
