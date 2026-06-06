@@ -35,6 +35,12 @@ The Flask Mega-Tutorial, Part VI: Profile Page and Avatars n.d., Miguel Grinberg
 
 Basic Usage n.d., Grey Li, accessed 24 May 2026,
 <https://flask-ckeditor.readthedocs.io/en/latest/basic.html>
+
+Select n.d., Pallets, accessed 6 June 2026,
+<https://flask-sqlalchemy.readthedocs.io/en/stable/queries/#select>
+
+Selecting ORM Entities n.d., the SQLAlchemy authors and contributors,
+accessed 6 June 2026, <https://docs.sqlalchemy.org/en/20/orm/queryguide/select.html#selecting-orm-entities>
 """
 
 import os
@@ -313,6 +319,15 @@ def edit_post(post_id):
 @admin_only
 def delete_post(post_id):
     post_to_delete = db.get_or_404(BlogPost, post_id)
+
+    # Deleting comments of the post_to_delete first to avoid
+    # having comments unattached to any post
+    for comment in post_to_delete.comments:
+        comment_to_delete = db.session.execute(db.select(Comment).filter_by(id=comment.id)).scalar()
+
+        db.session.delete(comment_to_delete)
+        db.session.commit()
+
     db.session.delete(post_to_delete)
     db.session.commit()
 
